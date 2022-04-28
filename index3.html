@@ -22,5 +22,46 @@
                 <br />
                 <center><a href='https://cloud.magiclen.org/tw/qrcode/scanner'><img src="https://raw.githubusercontent.com/kao77/liffpicturetext/main/%E6%8E%83%E6%8F%8F%E6%A2%9D%E7%A2%BC.png" width="300" height="200"></a><br></center>
                 <center><a href=''><img src="https://raw.githubusercontent.com/kao77/liffpicturetext/main/%E5%8A%A0%E5%85%A5%E7%94%A2%E5%93%81.png" width="300" height="200"></a></div></center>
-
+                <script src="https://static.line-scdn.net/liff/edge/2.1//sdk.js"></Script>
+                    <script>
+                        function initializeLiff(myLiffId){
+                            liff,init({liffId: myLiffId});
+                        }
+                        function pushMsg(pdate){
+                            if(pdate == ''){
+                                alert('每個項目都要輸入!')
+                            }
+                            var msg ="###";
+                            msg=msg+pdate
+                            liff.sendMessages([//推播訊息
+                            {
+                                type:'text',
+                                text:msg
+                            }])
+                            .then(() => {
+                                liff.closeWindow();
+                            });
+                        }
+                        $(Document).ready(function(){
+                            initializeLiff('{{liffid}}');
+                            $('#new').click(function(e){
+                                pushMsg($('#date').val());
+                            });
+                        });
+        
+                        $(document).ready(function () {
+                            const liffId = "1656983506-Z8xg0WVg";
+                            initializeLiff(liffId);
+                        })
+                
+                        function initializeLiff(liffId) {
+                            liff.init({
+                                liffId: liffId
+                            }).then(() => {
+                                initializeApp();
+                            }).catch((err) => {
+                                console.log('LIFF Initialization failed ', err);
+                            });
+                        }
+                    </script>
         </div>
